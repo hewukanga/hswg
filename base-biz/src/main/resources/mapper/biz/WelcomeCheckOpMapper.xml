@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.biz.mapper.WelcomeCheckOpMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        `id`,
+        `wc_id`,
+        `op_id`,
+        `op_name`,
+        `del_flag`,
+        `version`
+    </sql>
+
+    <select id="findWelcomeCheckOpPage" resultType="com.jiumai.base.biz.vo.WelcomeCheckOpVO">
+        SELECT <include refid="Base_Column_List"></include>
+        FROM pm_welcome_check_op
+        WHERE del_flag = 1
+    </select>
+</mapper>

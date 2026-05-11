@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.biz.mapper.ActivityMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        `id`,
+        `activity_title`,
+        `activity_type`,
+        `activity_cover_picture`,
+        `activity_address`,
+        `activity_address_name`,
+        `activity_longitude`,
+        `activity_latitude`,
+        `activity_start_date`,
+        `activity_end_date`,
+        `activity_introduce`,
+        `open_sign_up`,
+        `sign_up_start_date`,
+        `sign_up_end_date`,
+        `sign_up_limit`,
+        `registered_num`,
+        `activity_status`,
+        `audit_status`,
+        `area_path`,
+        `org_path`,
+        `reject_reason`,
+        `activity_qr_code`,
+        `user_name_flag`,
+        `phone_flag`,
+        `id_card_flag`,
+        `we_chat_flag`,
+        `sex_flag`,
+        `age_flag`,
+        `create_id`,
+        `create_name`,
+        `create_date`,
+        `modify_id`,
+        `modify_name`,
+        `modify_date`,
+        `del_flag`,
+        `version`
+    </sql>
+
+    <select id="findActivityPage" resultType="com.jiumai.base.biz.vo.ActivityVO">
+        SELECT <include refid="Base_Column_List"></include>
+        FROM pm_activity
+        WHERE del_flag = 1
+    </select>
+</mapper>

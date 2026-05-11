@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.sm.mapper.DictionaryMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.jiumai.base.sm.entity.Dictionary">
+        <id column="id" property="id" />
+        <result column="dic_type_code" property="dicTypeCode" />
+        <result column="dic_code" property="dicCode" />
+        <result column="dic_name" property="dicName" />
+        <result column="parent_code" property="parentCode" />
+        <result column="dic_classify" property="dicClassify" />
+        <result column="insort" property="insort" />
+        <result column="create_id" property="createId" />
+        <result column="create_date" property="createDate" />
+        <result column="modify_id" property="modifyId" />
+        <result column="modify_date" property="modifyDate" />
+        <result column="del_flag" property="delFlag" />
+        <result column="version" property="version" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, dic_type_code, dic_code, dic_name, parent_code, dic_classify, insort, create_id, create_date, modify_id, modify_date, del_flag, version
+    </sql>
+
+    <select id="findDicByClassify" resultMap="BaseResultMap">
+        select  <include refid="Base_Column_List"></include>
+        from sm_dictionary
+        where dic_classify = #{dicClassify}
+        and del_flag = 1
+    </select>
+
+    <select id="findDicByTypeCode" resultMap="BaseResultMap">
+        select  <include refid="Base_Column_List"></include>
+        from sm_dictionary
+        where dic_type_code = #{dicTypeCode}
+        and del_flag = 1 and parent_code is not null
+    </select>
+
+    <select id="getDic" resultMap="BaseResultMap">
+        select  <include refid="Base_Column_List"></include>
+        from sm_dictionary
+        where dic_type_code = #{dicTypeCode}
+        and del_flag = 1
+        <if test="dicCode != null">
+            and dic_code = #{dicCode}
+        </if>
+    </select>
+
+    <select id="getDicByName" resultMap="BaseResultMap">
+        select  <include refid="Base_Column_List"></include>
+        from sm_dictionary
+        where dic_name = #{dicName} and del_flag = 1 and parent_code is null
+    </select>
+
+    <select id="isRepeatDic" resultMap="BaseResultMap">
+        select  <include refid="Base_Column_List"></include>
+        from sm_dictionary
+        where del_flag = 1
+        and dic_type_code = #{dictionary.dicTypeCode}
+        and (dic_name = #{dictionary.dicName} or dic_code = #{dictionary.dicCode})
+    </select>
+</mapper>

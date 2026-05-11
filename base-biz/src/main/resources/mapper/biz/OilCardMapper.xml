@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.biz.mapper.OilCardMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        `id`,
+        `card_no`,
+        `balance`,
+        `street_id`,
+        `street_name`,
+        `street_path`,
+        `create_id`,
+        `create_name`,
+        `create_date`,
+        `modify_id`,
+        `modify_name`,
+        `modify_date`,
+        `del_flag`,
+        `version`
+    </sql>
+
+    <select id="findOilCardPage" resultType="com.jiumai.base.biz.vo.OilCardVO">
+        SELECT <include refid="Base_Column_List"></include>
+        FROM pm_oil_card
+        WHERE del_flag = 1
+    </select>
+</mapper>

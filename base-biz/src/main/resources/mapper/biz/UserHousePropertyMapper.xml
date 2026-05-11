@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.biz.mapper.UserHousePropertyMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        `id`,
+        `user_id`,
+        `house_property_id`,
+        `create_id`,
+        `create_name`,
+        `create_date`,
+        `del_flag`,
+        `version`
+    </sql>
+
+    <select id="findUserHousePropertyPage" resultType="com.jiumai.base.biz.vo.UserHousePropertyVO">
+        SELECT <include refid="Base_Column_List"></include>
+        FROM pm_user_house_property
+        WHERE del_flag = 1
+    </select>
+</mapper>

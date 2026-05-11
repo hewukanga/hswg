@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.biz.mapper.ParkingLeaveOrderMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        `id`,
+        `trade_no`,
+        `parking_id`,
+        `project_no`,
+        `project_name`,
+        `order_no`,
+        `user_name`,
+        `parking_duration`,
+        `license_plate_number`,
+        `create_id`,
+        `create_name`,
+        `create_date`,
+        `modify_id`,
+        `modify_name`,
+        `modify_date`
+    </sql>
+
+    <select id="findParkingLeaveOrderPage" resultType="com.jiumai.base.biz.vo.ParkingLeaveOrderVO">
+        SELECT <include refid="Base_Column_List"></include>
+        FROM pm_parking_leave_order
+    </select>
+</mapper>

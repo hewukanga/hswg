@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.biz.mapper.KeepGreenMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        `id`,
+        `year_str`,
+        `month_str`,
+        `street_id`,
+        `street_name`,
+        `street_path`,
+        `type_code`,
+        `type_name`,
+        `type_sum`,
+        `create_id`,
+        `create_name`,
+        `create_date`,
+        `modify_id`,
+        `modify_name`,
+        `modify_date`,
+        `del_flag`,
+        `version`
+    </sql>
+
+    <select id="findKeepGreenPage" resultType="com.jiumai.base.biz.vo.KeepGreenVO">
+        SELECT <include refid="Base_Column_List"></include>
+        FROM pm_keep_green
+        WHERE del_flag = 1
+    </select>
+</mapper>

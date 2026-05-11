@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.biz.mapper.PropertyAreaMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        `id`,
+        `parent_id`,
+        `area_name`,
+        `zone_area_name`,
+        `area_code`,
+        `area_path`,
+        `area_level`,
+        `unit_price`,
+        `decoration_deposit`,
+        `service_start_time`,
+        `service_end_time`,
+        `service_hotline`,
+        `build_date`,
+        `jurisdictional_area`,
+        `cleaning_area`,
+        `green_keeping_area`,
+        `area_images`,
+        `screen_flag`
+    </sql>
+
+    <select id="findPropertyAreaPage" resultType="com.jiumai.base.biz.vo.PropertyAreaVO">
+        SELECT <include refid="Base_Column_List"></include>
+        FROM pm_property_area
+    </select>
+</mapper>

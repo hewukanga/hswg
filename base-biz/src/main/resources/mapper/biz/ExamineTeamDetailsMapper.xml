@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.biz.mapper.ExamineTeamDetailsMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        `id`,
+        `examine_team_id`,
+        `examine_team_org_id`,
+        `examine_team_org_name`,
+        `create_id`,
+        `create_name`,
+        `create_date`,
+        `modify_id`,
+        `modify_name`,
+        `modify_date`,
+        `del_flag`,
+        `version`
+    </sql>
+
+    <select id="findExamineTeamDetailsPage" resultType="com.jiumai.base.biz.vo.ExamineTeamDetailsVO">
+        SELECT <include refid="Base_Column_List"></include>
+        FROM pm_examine_team_details
+        WHERE del_flag = 1
+    </select>
+</mapper>

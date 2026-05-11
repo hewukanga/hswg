@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.sm.mapper.SmOpLogMapper">
+
+
+    <select id="findOpLogPaging" resultType="com.jiumai.base.sm.entity.SmOpLog">
+        SELECT op_log_id,
+        op_id,
+        op_name,
+        dept_name,
+        title,
+        business_type,
+        operate_type,
+        method,
+        status,
+        request_method,
+        url,
+        ip,
+        location,
+        error_msg,
+        op_time
+        FROM
+        sm_op_log
+        WHERE 1=1
+        <if test="query.title != null and query.title != ''">
+            AND title LIKE CONCAT('%', #{query.title},'%')
+        </if>
+        <if test="query.operName != null and query.operName != ''">
+            AND op_name LIKE CONCAT('%', #{query.operName},'%')
+        </if>
+        <if test="query.startTime != null">
+            AND op_time >= #{query.startTime}
+        </if>
+        <if test="query.endTime != null">
+            AND op_time &lt;= #{query.endTime}
+        </if>
+        ORDER BY op_time DESC
+    </select>
+</mapper>

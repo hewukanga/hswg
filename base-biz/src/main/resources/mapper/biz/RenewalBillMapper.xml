@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.biz.mapper.RenewalBillMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        `id`,
+        `trade_no`,
+        `license_plate_number`,
+        `parking_lot_code`,
+        `pay_monthly_rule_code`,
+        `pay_monthly_rule_name`,
+        `pay_monthly_rule_amount`,
+        `pay_monthly_duration`,
+        `monthly_card_validity_start_date`,
+        `monthly_card_validity_end_date`,
+        `actual_amount`,
+        `invoicing_status`,
+        `receipt_no`,
+        `receipt_image`,
+        `renewal_bill_status`,
+        `third_renewal_bill_order_no`,
+        `create_id`,
+        `create_name`,
+        `create_date`,
+        `create_phone`,
+        `modify_id`,
+        `modify_name`,
+        `modify_date`,
+        `del_flag`,
+        `version`
+    </sql>
+
+    <select id="findRenewalBillPage" resultType="com.jiumai.base.biz.vo.RenewalBillVO">
+        SELECT <include refid="Base_Column_List"></include>
+        FROM pm_renewal_bill
+        WHERE del_flag = 1
+    </select>
+</mapper>

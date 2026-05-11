@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.sm.mapper.InterfaceConfMapper">
+
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        interface_id, interface_name, interface_uri, interface_group_name, resource_id, resource_name, resource_type, create_id, create_name, create_date, modify_id, modify_name, modify_date, del_flag, version
+    </sql>
+
+    <select id="findInterfaceConfPage" resultType="com.jiumai.base.sm.dto.InterfaceConfDTO">
+        SELECT <include refid="Base_Column_List"></include>
+        FROM sm_interface_conf
+        WHERE del_flag = 1
+        <if test="query.interfaceName != null and query.interfaceName != ''">
+            and interface_name LIKE CONCAT('%', #{query.interfaceName},'%')
+        </if>
+        <if test="query.interfaceGroupName != null and query.interfaceGroupName != ''">
+            and interface_group_name LIKE CONCAT('%', #{query.interfaceGroupName},'%')
+        </if>
+    </select>
+</mapper>

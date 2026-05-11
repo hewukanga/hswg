@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.biz.mapper.PatrolListMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        `id`,
+        `rule_id`,
+        `rule_name`,
+        `rule_suit_user`,
+        `patrol_start_date`,
+        `patrol_end_date`,
+        `patrol_rate`,
+        `patrol_complete_status`,
+        `create_date`
+    </sql>
+
+    <select id="findPatrolListPage" resultType="com.jiumai.base.biz.vo.PatrolListVO">
+        SELECT <include refid="Base_Column_List"></include>
+        FROM pm_patrol_list
+    </select>
+</mapper>

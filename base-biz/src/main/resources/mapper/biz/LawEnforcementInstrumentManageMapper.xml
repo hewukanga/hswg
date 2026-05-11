@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.biz.mapper.LawEnforcementInstrumentManageMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        `id`,
+        `law_enforcement_instrument_code`,
+        `op_id`,
+        `op_name`,
+        `org_name`,
+        `org_id`,
+        `phone`,
+        `role_name`,
+        `role_id`,
+        `create_id`,
+        `create_name`,
+        `create_date`,
+        `modify_id`,
+        `modify_name`,
+        `modify_date`,
+        `del_flag`,
+        `version`,
+        `law_enforcement_instrument_index_code`
+    </sql>
+
+    <select id="findLawEnforcementInstrumentManagePage" resultType="com.jiumai.base.biz.vo.LawEnforcementInstrumentManageVO">
+        SELECT <include refid="Base_Column_List"></include>
+        FROM pm_law_enforcement_instrument_manage
+        WHERE del_flag = 1
+    </select>
+</mapper>

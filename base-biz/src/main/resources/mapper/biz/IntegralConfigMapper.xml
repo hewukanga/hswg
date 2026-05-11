@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.biz.mapper.IntegralConfigMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        `id`,
+        `type`,
+        `sub_type`,
+        `item_type`,
+        `calculation`,
+        `integral_sum`,
+        `amount`,
+        `obtain_limit`,
+        `enable_status`,
+        `modify_id`,
+        `modify_name`,
+        `modify_date`,
+        `del_flag`,
+        `version`
+    </sql>
+
+    <select id="findIntegralConfigPage" resultType="com.jiumai.base.biz.vo.IntegralConfigVO">
+        SELECT <include refid="Base_Column_List"></include>
+        FROM pm_integral_config
+        WHERE del_flag = 1
+    </select>
+</mapper>

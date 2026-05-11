@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.biz.mapper.UtilityBillMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        `id`,
+        `house_property_id`,
+        `payment_year`,
+        `community_id`,
+        `residential_quarters_id`,
+        `residential_quarters_name`,
+        `residential_quarters_path`,
+        `unit`,
+        `building`,
+        `house_number`,
+        `unit_price`,
+        `property_area`,
+        `payable_price`,
+        `actual_payment_price`,
+        `payment_status`,
+        `payment_source`,
+        `payment_date`,
+        `payment_user`,
+        `payment_user_id`,
+        `payment_user_phone`,
+        `payment_method`,
+        `invoice_status`,
+        `invoice_no`,
+        `invoice_file`,
+        `trade_no`,
+        `remark`,
+        `create_id`,
+        `create_name`,
+        `create_date`,
+        `del_flag`,
+        `version`
+    </sql>
+
+    <select id="findUtilityBillPage" resultType="com.jiumai.base.biz.vo.UtilityBillVO">
+        SELECT <include refid="Base_Column_List"></include>
+        FROM pm_utility_bill
+        WHERE del_flag = 1
+    </select>
+</mapper>

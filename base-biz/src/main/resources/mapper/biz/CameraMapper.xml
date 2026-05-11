@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.biz.mapper.CameraMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        `id`,
+        `camera_name`,
+        `camera_status`,
+        `camera_status_name`,
+        `camera_install_place`,
+        `camera_index_code`,
+        `camera_latitude`,
+        `camera_longitude`,
+        `camera_region_code`,
+        `create_time`,
+        `update_time`,
+        `del_flag`,
+        `version`
+    </sql>
+
+    <select id="findCameraPage" resultType="com.jiumai.base.biz.vo.CameraVO">
+        SELECT <include refid="Base_Column_List"></include>
+        FROM pm_camera
+        WHERE del_flag = 1
+    </select>
+</mapper>

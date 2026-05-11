@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.biz.mapper.OrderMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        `id`,
+        `order_title`,
+        `trade_no`,
+        `order_type`,
+        `order_state`,
+        `order_total_amount`,
+        `order_discount_amount`,
+        `order_actual_amount`,
+        `order_deduction_integral`,
+        `deduction_integral_record_id`,
+        `order_date_time`,
+        `order_pay_date`,
+        `order_cancel_reason`,
+        `order_cancel_date`,
+        `view_status`,
+        `create_id`,
+        `create_name`,
+        `create_date`,
+        `modify_id`,
+        `modify_name`,
+        `modify_date`,
+        `del_flag`,
+        `version`
+    </sql>
+
+    <select id="findOrderPage" resultType="com.jiumai.base.biz.vo.OrderVO">
+        SELECT <include refid="Base_Column_List"></include>
+        FROM pm_order
+        WHERE del_flag = 1
+    </select>
+</mapper>

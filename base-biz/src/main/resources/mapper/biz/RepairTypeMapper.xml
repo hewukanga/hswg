@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.biz.mapper.RepairTypeMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        `id`,
+        `repair_name`,
+        `price`,
+        `unit`,
+        `remark`,
+        `parent_id`,
+        `type`
+    </sql>
+
+    <select id="findRepairTypePage" resultType="com.jiumai.base.biz.vo.RepairTypeVO">
+        SELECT <include refid="Base_Column_List"></include>
+        FROM pm_repair_type
+    </select>
+</mapper>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.biz.mapper.MessageNoticeMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        `id`,
+        `notice_title`,
+        `send_object`,
+        `community_path`,
+        `community_name`,
+        `notice_content`,
+        `create_id`,
+        `create_name`,
+        `create_date`,
+        `create_phone`,
+        `create_area_path`,
+        `modify_id`,
+        `modify_name`,
+        `modify_date`,
+        `del_flag`,
+        `version`
+    </sql>
+
+    <select id="findMessageNoticePage" resultType="com.jiumai.base.biz.vo.MessageNoticeVO">
+        SELECT <include refid="Base_Column_List"></include>
+        FROM pm_message_notice
+        WHERE del_flag = 1
+    </select>
+</mapper>

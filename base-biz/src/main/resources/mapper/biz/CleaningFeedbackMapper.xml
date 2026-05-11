@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.biz.mapper.CleaningFeedbackMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        `id`,
+        `cleaning_area_id`,
+        `cleaning_situation_id`,
+        `images`,
+        `address`,
+        `longitude`,
+        `latitude`,
+        `create_org_path`,
+        `create_id`,
+        `create_name`,
+        `create_date`,
+        `modify_id`,
+        `modify_name`,
+        `modify_date`,
+        `del_flag`,
+        `version`
+    </sql>
+
+    <select id="findCleaningFeedbackPage" resultType="com.jiumai.base.biz.vo.CleaningFeedbackVO">
+        SELECT <include refid="Base_Column_List"></include>
+        FROM pm_cleaning_feedback
+        WHERE del_flag = 1
+    </select>
+</mapper>

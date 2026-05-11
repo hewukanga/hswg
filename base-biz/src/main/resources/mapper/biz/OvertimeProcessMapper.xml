@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.biz.mapper.OvertimeProcessMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        `id`,
+        `title`,
+        `overtime_type`,
+        `overtime_person_id`,
+        `overtime_person_name`,
+        `phone`,
+        `org_name`,
+        `top_shift_person_id`,
+        `top_shift_person_name`,
+        `overtime_start_time`,
+        `overtime_end_time`,
+        `overtime_duration`,
+        `overtime_reason`,
+        `overtime_status`,
+        `draft_status`,
+        `create_id`,
+        `create_name`,
+        `create_date`,
+        `modify_id`,
+        `modify_name`,
+        `modify_date`,
+        `del_flag`,
+        `version`
+    </sql>
+
+    <select id="findOvertimeProcessPage" resultType="com.jiumai.base.biz.vo.OvertimeProcessVO">
+        SELECT <include refid="Base_Column_List"></include>
+        FROM pm_overtime_process
+        WHERE del_flag = 1
+    </select>
+</mapper>

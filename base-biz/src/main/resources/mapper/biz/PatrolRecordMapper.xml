@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.biz.mapper.PatrolRecordMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        `id`,
+        `patrol_list_id`,
+        `patrol_list_name`,
+        `point_area_id`,
+        `point_area_path`,
+        `point_area_name`,
+        `point_id`,
+        `point_name`,
+        `point_type`,
+        `point_address`,
+        `patrol_date`,
+        `patrol_details`,
+        `patrol_user_name`,
+        `patrol_images`,
+        `patrol_situation`,
+        `patrol_report_type`,
+        `handle_after_images`,
+        `handle_details`,
+        `patrol_source`,
+        `create_id`,
+        `create_name`,
+        `create_date`,
+        `modify_id`,
+        `modify_name`,
+        `modify_date`,
+        `del_flag`,
+        `version`
+    </sql>
+
+    <select id="findPatrolRecordPage" resultType="com.jiumai.base.biz.vo.PatrolRecordVO">
+        SELECT <include refid="Base_Column_List"></include>
+        FROM pm_patrol_record
+        WHERE del_flag = 1
+    </select>
+</mapper>

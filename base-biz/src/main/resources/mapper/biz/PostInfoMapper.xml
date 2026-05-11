@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.biz.mapper.PostInfoMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        `id`,
+        `post_name`,
+        `post_type`,
+        `start_date`,
+        `end_date`,
+        `single_assignment_points`,
+        `need_person_num`,
+        `sign_up_num`,
+        `registration_deadline`,
+        `registration_age_limit`,
+        `sign_in_remind_type`,
+        `job_description`,
+        `post_status`,
+        `post_images`,
+        `create_id`,
+        `create_name`,
+        `create_date`,
+        `modify_id`,
+        `modify_name`,
+        `modify_date`,
+        `del_flag`,
+        `version`,
+        `registration_deadline_date`,
+        `registration_age_limit_value`,
+        `remind_value`,
+        `center_range`,
+        `remind_date`,
+        `area_ids`
+    </sql>
+
+    <select id="findPostInfoPage" resultType="com.jiumai.base.biz.vo.PostInfoVO">
+        SELECT <include refid="Base_Column_List"></include>
+        FROM pm_post_info
+        WHERE del_flag = 1
+    </select>
+</mapper>

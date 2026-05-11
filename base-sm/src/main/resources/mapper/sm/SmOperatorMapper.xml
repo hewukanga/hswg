@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.sm.mapper.SmOperatorMapper">
+
+
+    <select id="findOperatorByRoleId" resultType="com.jiumai.base.sm.entity.SmOperator">
+        SELECT op.OP_ID, op.OP_NAME
+        FROM sm_rel_op_role r
+                 LEFT JOIN sm_operator op ON op.OP_ID = r.OP_ID
+        WHERE r.ROLE_ID = #{roleId}
+    </select>
+
+    <select id="findOperatorPaging" resultType="com.jiumai.base.sm.dto.OperatorDTO">
+        SELECT
+        op.op_id, op.op_login_name,op.org_id,op.status,op.is_admin,
+        op.op_name, op.email, op.address, op.mobile_phone,
+        op.identity_type, op.identity_no,
+        op.photo, op.memo, op.create_id, op.create_date, op.modify_id, op.modify_date,
+        o.op_name as createOpName, o.create_date as creatDate, org.org_name as orgName,c.roleNames
+        FROM sm_operator op
+        INNER JOIN sm_operator o ON o.op_id = op.create_id
+        <if test="query.createId != null and query.createId != '' and query.createId != 1">
+            INNER JOIN sm_rel_op_org oporg on op.org_id = oporg.org_id
+            AND oporg.rel_type='REAL' and oporg.op_id = #{query.createId} AND oporg.EXPIRE_DATE IS null
+        </if>
+        INNER JOIN sm_organization org on op.org_id = org.org_id
+        LEFT JOIN
+        (
+        SELECT a.op_id,GROUP_CONCAT(b.role_name) roleNames
+        FROM sm_rel_op_role a
+        LEFT JOIN sm_role b ON a.role_id = b.role_id and a.rel_type != 'UNREAL' and a.expire_date is null
+        GROUP BY a.op_id
+        ) c ON op.op_id = c.op_id
+        WHERE 1=1
+        <if test="query.ownOrgId != null and query.ownOrgId != ''">
+            AND op.org_id = #{query.ownOrgId}
+        </if>
+        <if test="query.ownOrgIds != null and query.ownOrgIds.size() > 0">
+            and op.org_id IN
+            <foreach collection="query.ownOrgIds" separator="," open="(" close=")" item="orgId">
+                #{orgId}
+            </foreach>
+        </if>
+        <if test="query.opName != null and query.opName != ''">
+            AND op.op_name LIKE CONCAT('%', #{query.opName},'%')
+        </if>
+        <if test="query.opLoginName != null and query.opLoginName != ''">
+            AND op.op_login_name LIKE CONCAT('%', #{query.opLoginName},'%')
+        </if>
+        <if test="query.status != null and query.status.length > 0">
+            and op.status IN
+            <foreach collection="query.status" separator="," open="(" close=")" item="s">
+                #{s}
+            </foreach>
+        </if>
+        <if test="query.isAdmin != null and query.isAdmin != ''">
+            AND op.is_admin = #{query.isAdmin}
+        </if>
+        ORDER BY op.create_date DESC
+    </select>
+</mapper>

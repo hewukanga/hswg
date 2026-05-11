@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.biz.mapper.UserOpinionMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        `id`,
+        `content`,
+        `images`,
+        `community_path`,
+        `type`,
+        `adopt_state`,
+        `adopt_idea`,
+        `create_id`,
+        `create_name`,
+        `create_date`,
+        `create_phone`,
+        `del_flag`,
+        `version`,
+        `modify_id`,
+        `modify_name`,
+        `modify_date`
+    </sql>
+
+    <select id="findUserOpinionPage" resultType="com.jiumai.base.biz.vo.UserOpinionVO">
+        SELECT <include refid="Base_Column_List"></include>
+        FROM pm_user_opinion
+        WHERE del_flag = 1
+    </select>
+</mapper>

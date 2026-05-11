@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.biz.mapper.AttendanceRecordMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        `id`,
+        `op_id`,
+        `op_name`,
+        `job_number`,
+        `role_name`,
+        `attendance_group`,
+        `clock_in_date`,
+        `sign_in_time`,
+        `sign_out_time`,
+        `sign_in_status`,
+        `sign_out_status`,
+        `rule_start_time`,
+        `rule_end_time`,
+        `address`,
+        `longitude`,
+        `latitude`,
+        `create_id`,
+        `create_name`,
+        `create_date`,
+        `modify_id`,
+        `modify_name`,
+        `modify_date`,
+        `del_flag`,
+        `version`,
+        `out_address`,
+        `elderly_phone`
+    </sql>
+
+    <select id="findAttendanceRecordPage" resultType="com.jiumai.base.biz.vo.AttendanceRecordVO">
+        SELECT <include refid="Base_Column_List"></include>
+        FROM pm_attendance_record
+        WHERE del_flag = 1
+    </select>
+</mapper>

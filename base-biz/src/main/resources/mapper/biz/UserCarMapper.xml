@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.biz.mapper.UserCarMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        `id`,
+        `user_id`,
+        `user_name`,
+        `license_plate_number`,
+        `phone`,
+        `house_address`,
+        `new_energy_status`,
+        `default_status`,
+        `create_id`,
+        `create_name`,
+        `create_date`,
+        `create_path`,
+        `modify_id`,
+        `modify_name`,
+        `modify_date`,
+        `del_flag`,
+        `version`
+    </sql>
+
+    <select id="findUserCarPage" resultType="com.jiumai.base.biz.vo.UserCarVO">
+        SELECT <include refid="Base_Column_List"></include>
+        FROM pm_user_car
+        WHERE del_flag = 1
+    </select>
+</mapper>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.biz.mapper.UserMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        `id`,
+        `user_name`,
+        `open_id`,
+        `phone`,
+        `sex`,
+        `id_card`,
+        `head_image`,
+        `age`,
+        `street_name`,
+        `street_id`,
+        `community_name`,
+        `community_id`,
+        `grid_name`,
+        `grid_id`,
+        `residential_quarters_name`,
+        `residential_quarters_id`,
+        `building`,
+        `unit`,
+        `house_number`,
+        `party_member_status`,
+        `rel_house_property_name`,
+        `one_touch_repair`,
+        `area_path`,
+        `residual_integral_sum`,
+        `earned_integral_sum`,
+        `sign_up_no_sign_in_sum`,
+        `incomplete_exit_sum`,
+        `merchant`,
+        `merchant_name`,
+        `first_binding_status`,
+        `create_id`,
+        `create_name`,
+        `create_date`,
+        `modify_id`,
+        `modify_name`,
+        `modify_date`,
+        `del_flag`,
+        `version`,
+        `remark`
+    </sql>
+
+    <select id="findUserPage" resultType="com.jiumai.base.biz.vo.UserVO">
+        SELECT <include refid="Base_Column_List"></include>
+        FROM pm_user
+        WHERE del_flag = 1
+    </select>
+</mapper>

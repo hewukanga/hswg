@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.biz.mapper.ServiceOrderFlowMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        `id`,
+        `service_order_id`,
+        `flow_type`,
+        `images`,
+        `handle_content`,
+        `receive_phone`,
+        `receive_name`,
+        `time_consuming`,
+        `create_id`,
+        `create_name`,
+        `create_date`,
+        `create_phone`,
+        `modify_id`,
+        `modify_name`,
+        `modify_date`,
+        `del_flag`,
+        `version`,
+        `wx_notice`
+    </sql>
+
+    <select id="findServiceOrderFlowPage" resultType="com.jiumai.base.biz.vo.ServiceOrderFlowVO">
+        SELECT <include refid="Base_Column_List"></include>
+        FROM pm_service_order_flow
+        WHERE del_flag = 1
+    </select>
+</mapper>

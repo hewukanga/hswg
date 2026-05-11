@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.biz.mapper.ExamineRuleMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        `id`,
+        `calculation_period`,
+        `examine_type`,
+        `examine_one_score`,
+        `examine_two_score`,
+        `examine_three_score`,
+        `examine_four_score`,
+        `examine_five_score`,
+        `create_id`,
+        `create_name`,
+        `create_date`,
+        `modify_id`,
+        `modify_name`,
+        `modify_date`,
+        `del_flag`,
+        `version`
+    </sql>
+
+    <select id="findExamineRulePage" resultType="com.jiumai.base.biz.vo.ExamineRuleVO">
+        SELECT <include refid="Base_Column_List"></include>
+        FROM pm_examine_rule
+        WHERE del_flag = 1
+    </select>
+</mapper>

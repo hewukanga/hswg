@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.sm.mapper.SmEnumConfMapper">
+
+
+    <select id="findMaxUserEnumId" resultType="java.lang.Long">
+        SELECT MAX(ENUM_ID)
+        FROM sm_enum_conf
+        WHERE ENUM_TYPE = 'USER'
+    </select>
+
+    <select id="findEnumPaging" resultType="com.jiumai.base.sm.dto.EnumConfDTO">
+        SELECT distinct ENUM_CODE,
+        ENUM_NAME,
+        ENUM_TYPE
+        FROM sm_enum_conf enm
+        <where>
+            <if test="query.enumName != null and query.enumName != ''">
+                AND enm.ENUM_NAME LIKE CONCAT('%', #{query.enumName},'%')
+            </if>
+            <if test="query.enumCode != null and query.enumCode != ''">
+                AND enm.ENUM_CODE = #{query.enumCode}
+            </if>
+            <if test="query.enumType != null and query.enumType != ''">
+                AND enm.ENUM_TYPE = #{query.enumType}
+            </if>
+        </where>
+        ORDER BY enm.ENUM_CODE
+    </select>
+</mapper>

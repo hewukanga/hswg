@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.biz.mapper.ServiceOrderMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        `id`,
+        `trade_no`,
+        `work_order_type`,
+        `sub_work_order_type`,
+        `work_order_status`,
+        `service_address`,
+        `service_type_id`,
+        `service_type_name`,
+        `maintenance_subject_code`,
+        `maintenance_subject`,
+        `service_description`,
+        `appointment_start_date`,
+        `appointment_end_date`,
+        `images`,
+        `assign_person_id`,
+        `evaluate_status`,
+        `third_repair_id`,
+        `source`,
+        `collection_type`,
+        `collection_price`,
+        `total_time_consuming`,
+        `close_reason`,
+        `residential_quarters_id`,
+        `longitude`,
+        `latitude`,
+        `server_address_abbreviation`,
+        `weight`,
+        `estimated_volume`,
+        `one_repair_status`,
+        `create_id`,
+        `create_name`,
+        `create_date`,
+        `create_phone`,
+        `create_area_path`,
+        `modify_id`,
+        `modify_name`,
+        `modify_date`,
+        `del_flag`,
+        `version`
+    </sql>
+
+    <select id="findServiceOrderPage" resultType="com.jiumai.base.biz.vo.ServiceOrderVO">
+        SELECT <include refid="Base_Column_List"></include>
+        FROM pm_service_order
+        WHERE del_flag = 1
+    </select>
+</mapper>

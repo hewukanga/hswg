@@ -1,0 +1,40 @@
+.DS_Store
+Thumbs.db
+desktop.ini
+
+/target/
+/*/target/
+/log/
+/logs/
+/temp/
+*.log
+*.tmp
+*.pid
+*.hprof
+hs_err_pid*
+replay_pid*
+
+# Java / Maven build outputs
+*.class
+*.jar
+*.war
+*.ear
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# Local environment config with credentials
+base-runner/src/main/resources/application.properties
+base-runner/src/main/resources/application-dev.properties
+base-runner/src/main/resources/application-test.properties
+base-runner/src/main/resources/application-prod.properties
+
+# Editor directories and files
+.idea
+*.iml
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw*
+

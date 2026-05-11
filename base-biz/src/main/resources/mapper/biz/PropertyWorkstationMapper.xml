@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.biz.mapper.PropertyWorkstationMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        `id`,
+        `area_id`,
+        `charge_person_id`,
+        `charge_person`,
+        `charge_person_age`,
+        `charge_person_sex`,
+        `phone`,
+        `head_image`,
+        `address`,
+        `longitude`,
+        `latitude`,
+        `create_id`,
+        `create_name`,
+        `create_date`,
+        `modify_id`,
+        `modify_name`,
+        `modify_date`,
+        `del_flag`,
+        `version`
+    </sql>
+
+    <select id="findPropertyWorkstationPage" resultType="com.jiumai.base.biz.vo.PropertyWorkstationVO">
+        SELECT <include refid="Base_Column_List"></include>
+        FROM pm_property_workstation
+        WHERE del_flag = 1
+    </select>
+</mapper>

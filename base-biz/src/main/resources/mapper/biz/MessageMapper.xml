@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.biz.mapper.MessageMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        `id`,
+        `goods_id`,
+        `goods_title`,
+        `goods_price`,
+        `message_content`,
+        `source`,
+        `read_status`,
+        `type`,
+        `receiver_id`,
+        `receiver_name`,
+        `sender_id`,
+        `sender_name`,
+        `sender_head_image`,
+        `goods_images`,
+        `private_unread_message_sum`,
+        `message_date`,
+        `version`,
+        `goods_user_name`,
+        `goods_user_head_image`
+    </sql>
+
+    <select id="findMessagePage" resultType="com.jiumai.base.biz.vo.MessageVO">
+        SELECT <include refid="Base_Column_List"></include>
+        FROM pm_message
+    </select>
+</mapper>

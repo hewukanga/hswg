@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.biz.mapper.CleaningAreaOpMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        `id`,
+        `cleaning_area_id`,
+        `op_type`,
+        `op_id`,
+        `op_name`,
+        `op_phone`,
+        `create_id`,
+        `create_name`,
+        `create_date`
+    </sql>
+
+    <select id="findCleaningAreaOpPage" resultType="com.jiumai.base.biz.vo.CleaningAreaOpVO">
+        SELECT <include refid="Base_Column_List"></include>
+        FROM pm_cleaning_area_op
+    </select>
+</mapper>

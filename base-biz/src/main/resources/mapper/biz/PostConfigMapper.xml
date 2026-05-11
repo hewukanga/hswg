@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.biz.mapper.PostConfigMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        `id`,
+        `config_type`,
+        `config_content`,
+        `config_hour`,
+        `config_minutes`,
+        `create_id`,
+        `create_name`,
+        `create_date`,
+        `modify_id`,
+        `modify_name`,
+        `modify_date`,
+        `del_flag`,
+        `version`
+    </sql>
+
+    <select id="findPostConfigPage" resultType="com.jiumai.base.biz.vo.PostConfigVO">
+        SELECT <include refid="Base_Column_List"></include>
+        FROM pm_post_config
+        WHERE del_flag = 1
+    </select>
+</mapper>

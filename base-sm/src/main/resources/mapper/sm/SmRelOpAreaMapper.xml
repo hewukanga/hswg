@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.sm.mapper.SmRelOpAreaMapper">
+
+
+    <update id="batchUpdateExpireDate" parameterType="java.util.List">
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            update sm_rel_op_area
+            <set>
+                <if test="item.modifyId != null and item.modifyId != ''">
+                    modify_id=#{item.modifyId},
+                </if>
+                <if test="item.expireDate != null">
+                    expire_date=#{item.expireDate},
+                </if>
+                modify_date=#{item.modifyDate}
+            </set>
+            where op_id = #{item.opId} AND area_id = #{item.areaId} AND EXPIRE_DATE IS NULL
+        </foreach>
+    </update>
+</mapper>

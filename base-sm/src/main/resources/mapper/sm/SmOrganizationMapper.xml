@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.sm.mapper.SmOrganizationMapper">
+
+
+    <select id="findOrganizationPaging" resultType="com.jiumai.base.sm.dto.OrganizationDTO">
+        SELECT a.*
+        FROM sm_organization a
+        <if test="query.opId != null and query.opId != '' and query.opId > 1">
+            INNER JOIN sm_rel_op_org rel
+            ON a.org_id = rel.org_id
+        </if>
+        WHERE a.expire_date IS NULL
+        <if test="query.opId != null and query.opId != '' and query.opId > 1">
+            AND rel.expire_date is null
+            AND rel.op_id = #{query.opId}
+        </if>
+        <if test="query.orgName != null and query.orgName != ''">
+            AND a.org_name LIKE CONCAT('%', #{query.orgName},'%')
+        </if>
+        <if test="query.parentId != null and query.parentId != ''">
+            AND a.parent_id = #{query.parentId}
+            AND a.org_id != #{query.parentId}
+        </if>
+        ORDER BY a.create_date ASC
+    </select>
+
+    <select id="findAccessOrgsByOpId" resultType="com.jiumai.base.sm.dto.OrganizationDTO">
+        SELECT DISTINCT org.org_id, org.org_code,org.org_type,
+        org.org_name,org.org_desc,org.org_path,
+        org.parent_id,org.is_data_control,
+        org.create_id,org.create_date,
+        org.modify_id,org.modify_date,org.expire_date,org.status
+        FROM sm_organization org
+        <if test="opId != null and opId != '' and opId > 1">
+            INNER JOIN sm_rel_op_org rel
+            ON org.org_id = rel.org_id AND rel.expire_date IS NULL AND org.expire_date IS NULL
+        </if>
+        WHERE org.expire_date is NULL
+        <if test="opId != null and opId != '' and opId > 1">
+            AND rel.op_id = #{opId}
+        </if>
+        ORDER BY org.parent_id ,org.create_date ASC
+    </select>
+
+    <select id="searchOrganizations" resultType="com.jiumai.base.sm.dto.OrganizationDTO">
+        SELECT t.*
+        FROM sm_organization t
+        WHERE 1 = 1
+        and t.expire_date is null
+        and t.org_id in (
+        select o.org_id from sm_rel_op_org o where o.op_id = #{opId} and o.rel_type = #{relType}
+        )
+        <if test="searchKey != null and searchKey != ''">
+            and (t.org_code = #{searchKey} or t.org_name LIKE CONCAT('%', #{searchKey}, '%'))
+        </if>
+        ORDER BY t.create_date DESC
+    </select>
+</mapper>

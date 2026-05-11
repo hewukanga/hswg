@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.biz.mapper.MiniClickStatisticsMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        `id`,
+        `street_id`,
+        `street_name`,
+        `statistics_date`,
+        `today_visits`,
+        `today_hits`,
+        `modify_date`,
+        `del_flag`,
+        `version`
+    </sql>
+
+    <select id="findMiniClickStatisticsPage" resultType="com.jiumai.base.biz.vo.MiniClickStatisticsVO">
+        SELECT <include refid="Base_Column_List"></include>
+        FROM pm_mini_click_statistics
+        WHERE del_flag = 1
+    </select>
+</mapper>

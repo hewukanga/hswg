@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.biz.mapper.ServiceOrderEvaluateMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        `id`,
+        `service_order_id`,
+        `work_order_type`,
+        `satisfaction`,
+        `suggest`,
+        `images`,
+        `phone`,
+        `community_path`,
+        `rel_house_property_name`,
+        `create_id`,
+        `create_name`,
+        `create_date`,
+        `create_phone`,
+        `modify_id`,
+        `modify_name`,
+        `modify_date`,
+        `del_flag`,
+        `version`
+    </sql>
+
+    <select id="findServiceOrderEvaluatePage" resultType="com.jiumai.base.biz.vo.ServiceOrderEvaluateVO">
+        SELECT <include refid="Base_Column_List"></include>
+        FROM pm_service_order_evaluate
+        WHERE del_flag = 1
+    </select>
+</mapper>

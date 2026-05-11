@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.biz.mapper.GeneralTransactionMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        `id`,
+        `business_type`,
+        `order_no`,
+        `trade_no`,
+        `third_trade_no`,
+        `payment_method`,
+        `payment_state`,
+        `total_amount`,
+        `discount_amount`,
+        `actual_amount`,
+        `title`,
+        `body`,
+        `pay_user_info`,
+        `notify_url`,
+        `return_url`,
+        `create_id`,
+        `create_name`,
+        `create_date`,
+        `modify_id`,
+        `modify_name`,
+        `modify_date`,
+        `del_flag`,
+        `version`
+    </sql>
+
+    <select id="findGeneralTransactionPage" resultType="com.jiumai.base.biz.vo.GeneralTransactionVO">
+        SELECT <include refid="Base_Column_List"></include>
+        FROM pm_general_transaction
+        WHERE del_flag = 1
+    </select>
+</mapper>

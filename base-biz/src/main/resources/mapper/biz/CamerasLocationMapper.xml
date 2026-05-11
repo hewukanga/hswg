@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.biz.mapper.CamerasLocationMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        `id`,
+        `latitude`,
+        `longitude`,
+        `camera_index_code`,
+        `ip_address`,
+        `port_no`,
+        `recv_time`
+    </sql>
+
+    <select id="findCamerasLocationPage" resultType="com.jiumai.base.biz.vo.CamerasLocationVO">
+        SELECT <include refid="Base_Column_List"></include>
+        FROM pm_cameras_location
+    </select>
+</mapper>

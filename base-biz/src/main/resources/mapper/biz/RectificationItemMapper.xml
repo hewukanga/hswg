@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.biz.mapper.RectificationItemMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        `id`,
+        `rectification_form_id`,
+        `rectification_item_type`,
+        `rectification_item_type_name`,
+        `rectification_item_description`,
+        `deduct_score`,
+        `rectification_item_status`,
+        `area_id`,
+        `area_name`,
+        `image`,
+        `handle_image`,
+        `create_id`,
+        `create_name`,
+        `create_date`,
+        `modify_id`,
+        `modify_name`,
+        `modify_date`,
+        `del_flag`,
+        `version`
+    </sql>
+
+    <select id="findRectificationItemPage" resultType="com.jiumai.base.biz.vo.RectificationItemVO">
+        SELECT <include refid="Base_Column_List"></include>
+        FROM pm_rectification_item
+        WHERE del_flag = 1
+    </select>
+</mapper>

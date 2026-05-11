@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.biz.mapper.ProcessMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        `id`,
+        `start_date`,
+        `end_date`,
+        `type`,
+        `leave_type`,
+        `overtime_type`,
+        `process_status`,
+        `overtime_duration`,
+        `leave_duration`,
+        `reason`,
+        `images`,
+        `curren_audit_role_id`,
+        `told_role_id`,
+        `audited_op_id`,
+        `reject_op_id`,
+        `commit_org_id`,
+        `create_id`,
+        `create_name`,
+        `phone`,
+        `create_org`,
+        `create_date`,
+        `modify_id`,
+        `modify_name`,
+        `modify_date`,
+        `del_flag`,
+        `version`,
+        `replacement_duration`
+    </sql>
+
+    <select id="findProcessPage" resultType="com.jiumai.base.biz.vo.ProcessVO">
+        SELECT <include refid="Base_Column_List"></include>
+        FROM pm_process
+        WHERE del_flag = 1
+    </select>
+</mapper>

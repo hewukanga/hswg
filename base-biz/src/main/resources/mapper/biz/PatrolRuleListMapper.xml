@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.biz.mapper.PatrolRuleListMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        `id`,
+        `rule_name`,
+        `rule_description`,
+        `rule_type`,
+        `rule_start_date`,
+        `rule_end_date`,
+        `rule_frequency`,
+        `rule_point_name`,
+        `rule_enable_status`,
+        `time_slot_start`,
+        `time_slot_end`,
+        `create_id`,
+        `create_name`,
+        `create_date`,
+        `modify_id`,
+        `modify_name`,
+        `modify_date`,
+        `del_flag`,
+        `version`,
+        `trigger_job_name`,
+        `trigger_job_group`,
+        `trigger_cron_expression`
+    </sql>
+
+    <select id="findPatrolRuleListPage" resultType="com.jiumai.base.biz.vo.PatrolRuleListVO">
+        SELECT <include refid="Base_Column_List"></include>
+        FROM pm_patrol_rule_list
+        WHERE del_flag = 1
+    </select>
+</mapper>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.sm.mapper.SmRoleMapper">
+
+
+    <select id="getRoleByPrentId" resultType="com.jiumai.base.sm.dto.RoleDTO">
+        SELECT r.create_id,
+               r.create_date,
+               r.modify_id,
+               r.modify_date,
+               r.role_desc,
+               r.role_id,
+               r.parent_id,
+               r.role_name,
+               r.role_type,
+               o.op_name
+        from sm_role r
+                 INNER JOIN sm_operator o ON o.op_id = r.create_id
+        WHERE r.role_id = #{parentId}
+    </select>
+
+    <select id="ifRepeatNameUpdate" resultType="java.lang.Integer">
+        SELECT COUNT(1) from sm_role r WHERE r.role_name = #{role.roleName} AND r.role_id != #{role.roleId}
+        <choose>
+            <when test="role.roleId == role.parentId">
+                AND r.parent_id = r.role_id
+            </when>
+            <otherwise>
+                AND r.parent_id = #{role.parentId}
+            </otherwise>
+        </choose>
+    </select>
+</mapper>

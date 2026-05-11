@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.biz.mapper.ActivitySignUpMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        `id`,
+        `activity_id`,
+        `activity_type`,
+        `user_id`,
+        `user_name`,
+        `phone`,
+        `id_card`,
+        `we_chat`,
+        `avatar_image_url`,
+        `sex`,
+        `age`,
+        `sign_up_date`,
+        `sign_in_status`,
+        `sign_in_date`,
+        `source`,
+        `del_flag`,
+        `version`
+    </sql>
+
+    <select id="findActivitySignUpPage" resultType="com.jiumai.base.biz.vo.ActivitySignUpVO">
+        SELECT <include refid="Base_Column_List"></include>
+        FROM pm_activity_sign_up
+        WHERE del_flag = 1
+    </select>
+</mapper>

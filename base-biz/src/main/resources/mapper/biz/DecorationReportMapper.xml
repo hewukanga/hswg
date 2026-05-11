@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.biz.mapper.DecorationReportMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        `id`,
+        `construction_unit`,
+        `construction_principal`,
+        `construction_principal_phone`,
+        `house_address`,
+        `house_details_address`,
+        `area_path`,
+        `renovation_start_date`,
+        `renovation_end_date`,
+        `renovation_deposit`,
+        `status`,
+        `trade_no`,
+        `pay_date`,
+        `receipt_no`,
+        `receipt_files`,
+        `sign_image`,
+        `agree_refund_date`,
+        `create_id`,
+        `create_name`,
+        `create_date`,
+        `create_phone`,
+        `create_address`,
+        `modify_id`,
+        `modify_name`,
+        `modify_date`,
+        `del_flag`,
+        `version`,
+        `promise_files`,
+        `promise_image`
+    </sql>
+
+    <select id="findDecorationReportPage" resultType="com.jiumai.base.biz.vo.DecorationReportVO">
+        SELECT <include refid="Base_Column_List"></include>
+        FROM pm_decoration_report
+        WHERE del_flag = 1
+    </select>
+</mapper>

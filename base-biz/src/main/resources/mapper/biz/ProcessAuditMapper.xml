@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.biz.mapper.ProcessAuditMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        `id`,
+        `process_name`,
+        `process_type`,
+        `process_description`,
+        `application_org_id`,
+        `commit_role_id`,
+        `application_org_name`,
+        `commit_role_name`,
+        `enable_status`,
+        `create_id`,
+        `create_name`,
+        `create_date`,
+        `modify_id`,
+        `modify_name`,
+        `modify_date`,
+        `del_flag`,
+        `version`
+    </sql>
+
+    <select id="findProcessAuditPage" resultType="com.jiumai.base.biz.vo.ProcessAuditVO">
+        SELECT <include refid="Base_Column_List"></include>
+        FROM pm_process_audit
+        WHERE del_flag = 1
+    </select>
+</mapper>

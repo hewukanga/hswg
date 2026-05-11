@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.biz.mapper.CleaningAreaMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        `id`,
+        `cleaning_area_name`,
+        `point_description`,
+        `cleaning_type`,
+        `cleaning_area_point`,
+        `cleaning_center_lng`,
+        `cleaning_center_lat`,
+        `cleaning_center_name`,
+        `cleaning_person_size`,
+        `street_id`,
+        `street_name`,
+        `street_path`,
+        `community_id`,
+        `community_name`,
+        `community_path`,
+        `charge_name`,
+        `charge_phone`,
+        `cleaner_name`,
+        `validity_date`,
+        `last_cleaning_time`,
+        `create_id`,
+        `create_name`,
+        `create_date`,
+        `modify_id`,
+        `modify_name`,
+        `modify_date`,
+        `del_flag`,
+        `version`
+    </sql>
+
+    <select id="findCleaningAreaPage" resultType="com.jiumai.base.biz.vo.CleaningAreaVO">
+        SELECT <include refid="Base_Column_List"></include>
+        FROM pm_cleaning_area
+        WHERE del_flag = 1
+    </select>
+</mapper>

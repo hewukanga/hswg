@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.sm.mapper.SmAreaMapper">
+
+
+    <select id="findAreaListByOpId" resultType="com.jiumai.base.sm.dto.AreaDTO">
+        select
+        a.AREA_ID,a.AREA_CODE,a.AREA_TYPE,a.AREA_NAME,a.AREA_DESC
+        ,a.AREA_PATH,a.PARENT_ID,a.IS_DATA_CONTROL,a.CREATE_ID
+        ,a.CREATE_DATE,a.MODIFY_ID,a.MODIFY_DATE,a.EXPIRE_DATE
+        from sm_area a
+        <if test="opId != 1">
+            LEFT JOIN SM_REL_OP_AREA b on a.area_id = b.area_id
+        </if>
+        where a.AREA_TYPE &lt; 4 AND a.EXPIRE_DATE IS NULL AND a.status='VALID'
+        <if test="opId != null and opId != '' and opId != 1">
+            AND b.EXPIRE_DATE IS NULL and b.OP_ID=#{opId}
+        </if>
+    </select>
+
+    <select id="findAreaList" resultType="com.jiumai.base.sm.dto.AreaDTO">
+        select a.AREA_ID
+             , a.AREA_CODE
+             , a.AREA_TYPE
+             , a.AREA_NAME
+             , a.AREA_DESC
+             , a.AREA_PATH
+             , a.PARENT_ID
+             , a.IS_DATA_CONTROL
+             , a.CREATE_ID
+             , a.CREATE_DATE
+             , a.MODIFY_ID
+             , a.MODIFY_DATE
+             , a.EXPIRE_DATE
+        from sm_area a
+        where a.EXPIRE_DATE IS NULL
+          AND a.status = 'VALID'
+    </select>
+
+    <select id="findAreaPaging" resultType="com.jiumai.base.sm.dto.AreaDTO">
+        SELECT a.AREA_ID,
+        a.AREA_CODE,
+        a.AREA_TYPE,
+        a.AREA_NAME,
+        a.AREA_DESC,
+        a.AREA_PATH,
+        a.PARENT_ID,
+        a.IS_DATA_CONTROL,
+        a.CREATE_ID,
+        a.CREATE_DATE,
+        a.MODIFY_ID,
+        op.OP_NAME AS createName,
+        a.MODIFY_DATE,
+        a.EXPIRE_DATE,
+        a1.AREA_NAME AS parentName,
+        a.STATUS
+        FROM sm_area a
+        INNER JOIN sm_area a1 ON a.PARENT_ID = a1.AREA_ID
+        INNER JOIN sm_operator op ON a.CREATE_ID = op.OP_ID
+        <if test="query.opId != 1">
+            LEFT JOIN SM_REL_OP_AREA b
+            on a.area_id = b.area_id
+        </if>
+        where a.EXPIRE_DATE IS NULL
+        <if test="query.opId != null and query.opId != '' and query.opId != 1">
+            AND b.EXPIRE_DATE IS NULL
+            and b.OP_ID=#{query.opId}
+        </if>
+        <if test="query.areaId != null and query.areaId != ''">
+            AND a.PARENT_ID =#{query.areaId}
+        </if>
+        <if test="query.areaCode != null and query.areaCode != ''">
+            AND a.AREA_CODE LIKE CONCAT('%', #{query.areaCode},'%')
+        </if>
+        <if test="query.areaName != null and query.areaName != ''">
+            AND a.AREA_NAME LIKE CONCAT('%', #{query.areaName},'%')
+        </if>
+    </select>
+</mapper>

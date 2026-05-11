@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.biz.mapper.ParkingLotMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        `id`,
+        `parking_lot_code`,
+        `parking_lot_name`,
+        `parking_lot_address`,
+        `parking_lot_longitude`,
+        `parking_lot_latitude`,
+        `parking_lot_type_name`,
+        `parking_lot_area`,
+        `parking_space_total`,
+        `parking_space_free`,
+        `service_telephone`,
+        `parking_lot_status`,
+        `charge_nature`,
+        `create_id`,
+        `create_name`,
+        `create_date`,
+        `create_phone`,
+        `modify_id`,
+        `modify_name`,
+        `modify_date`,
+        `del_flag`,
+        `version`,
+        `street_id`,
+        `street_name`,
+        `community_id`,
+        `community_name`,
+        `community_path`
+    </sql>
+
+    <select id="findParkingLotPage" resultType="com.jiumai.base.biz.vo.ParkingLotVO">
+        SELECT <include refid="Base_Column_List"></include>
+        FROM pm_parking_lot
+        WHERE del_flag = 1
+    </select>
+</mapper>

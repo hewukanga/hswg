@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.biz.mapper.HousePropertyMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        `id`,
+        `street_name`,
+        `street_id`,
+        `community_name`,
+        `community_id`,
+        `grid_name`,
+        `grid_id`,
+        `residential_quarters_name`,
+        `residential_quarters_id`,
+        `unit`,
+        `building`,
+        `house_number`,
+        `complete_address`,
+        `property_area`,
+        `unit_price`,
+        `decoration_deposit`,
+        `area_path`,
+        `community_path`,
+        `remark`,
+        `have_unpaid_bill`,
+        `householder_name`,
+        `householder_phone`,
+        `create_id`,
+        `create_name`,
+        `create_date`,
+        `modify_id`,
+        `modify_name`,
+        `modify_date`,
+        `del_flag`,
+        `version`
+    </sql>
+
+    <select id="findHousePropertyPage" resultType="com.jiumai.base.biz.vo.HousePropertyVO">
+        SELECT <include refid="Base_Column_List"></include>
+        FROM pm_house_property
+        WHERE del_flag = 1
+    </select>
+</mapper>

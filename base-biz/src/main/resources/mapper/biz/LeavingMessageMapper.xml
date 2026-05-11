@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.biz.mapper.LeavingMessageMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        `id`,
+        `goods_id`,
+        `content`,
+        `level`,
+        `sender_id`,
+        `sender_name`,
+        `sender_head_image`,
+        `receiver_id`,
+        `receiver_name`,
+        `receiver_head_image`,
+        `admin_reply`,
+        `answer_status`,
+        `parent_id`,
+        `create_date`,
+        `buyers_flag`,
+        `del_flag`,
+        `version`
+    </sql>
+
+    <select id="findLeavingMessagePage" resultType="com.jiumai.base.biz.vo.LeavingMessageVO">
+        SELECT <include refid="Base_Column_List"></include>
+        FROM pm_leaving_message
+        WHERE del_flag = 1
+    </select>
+</mapper>

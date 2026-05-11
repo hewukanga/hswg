@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.sm.mapper.SmResourceMapper">
+
+    <select id="findResourcePaging" resultType="com.jiumai.base.sm.dto.ResourceDTO">
+        SELECT
+        res.*
+        FROM sm_resource res
+        <if test="query.opId != null and query.opId != '' and query.opId > 1">
+            INNER JOIN sm_rel_res_role resRole ON resRole.resource_id = res.resource_id
+            INNER JOIN sm_rel_op_role opRole ON resRole.role_id = opRole.role_id
+        </if>
+        WHERE res.expire_date IS NULL
+        <if test="query.opId != null and query.opId != '' and query.opId > 1">
+            AND opRole.expire_date is null AND opRole.op_id = #{query.opId} AND resRole.expire_date is null
+        </if>
+        <if test="query.parentId != null and query.parentId != ''">
+            AND res.parent_id = #{query.parentId}
+        </if>
+        AND res.resource_id != #{query.parentId}
+        ORDER BY res.menu_sort ASC
+
+    </select>
+
+    <select id="getByOpId" resultType="com.jiumai.base.sm.dto.ResourceDTO">
+        SELECT res.*
+        FROM sm_resource res
+        <if test="opId != null and opId != '' and opId > 1">
+            INNER JOIN sm_rel_res_role resrole ON res.resource_id = resrole.resource_id
+            INNER JOIN sm_rel_op_role oprole ON resrole.role_id = oprole.role_id
+        </if>
+        WHERE res.expire_date IS NULL
+        <if test="opId != null and opId != '' and opId > 1">
+            AND resrole.expire_date IS NULL
+            AND oprole.expire_date IS NULL
+            AND oprole.op_id = #{opId}
+        </if>
+        ORDER BY parent_id, menu_sort ASC
+    </select>
+
+    <select id="getMenuByOpId" resultType="com.jiumai.base.sm.dto.ResourceDTO">
+        SELECT res.*
+        FROM sm_resource res
+        <if test="opId != null and opId != '' and opId > 1">
+            INNER JOIN sm_rel_res_role resrole ON res.resource_id = resrole.resource_id
+            INNER JOIN sm_rel_op_role oprole ON resrole.role_id = oprole.role_id
+        </if>
+        WHERE res.expire_date IS NULL and res.resource_Type in('RESOURCE_DIR','RESOURCE_MENU','RESOURCE_ROUTER')
+        <if test="opId != null and opId != '' and opId > 1">
+            AND res.status = 'VALID'
+            AND resrole.expire_date IS NULL
+            AND oprole.expire_date IS NULL
+            AND oprole.op_id = #{opId}
+        </if>
+        ORDER BY parent_id, menu_sort ASC
+    </select>
+
+    <select id="findOperatorBtn" resultType="com.jiumai.base.sm.dto.ResourceDTO">
+        SELECT res.RESOURCE_TITLE,res.RESOURCE_CODE,res.MENU_URL
+        FROM sm_resource res
+        <if test="opId != null and opId != '' and opId > 1">
+            INNER JOIN sm_rel_res_role resrole ON res.resource_id = resrole.resource_id
+            INNER JOIN sm_rel_op_role oprole ON resrole.role_id = oprole.role_id
+        </if>
+        WHERE res.expire_date IS NULL and res.resource_Type = 'RESOURCE_BTN'
+        <if test="opId != null and opId != '' and opId > 1">
+            AND resrole.expire_date IS NULL
+            AND oprole.expire_date IS NULL
+            AND oprole.op_id = #{opId}
+        </if>
+        ORDER BY parent_id, menu_sort ASC
+    </select>
+
+    <select id="getBtnByOpId" resultType="com.jiumai.base.sm.dto.ResourceDTO">
+        SELECT res.resource_code,res.resource_id,res.resource_title
+        FROM sm_resource res
+        <if test="opId != null and opId != '' and opId > 1">
+            INNER JOIN sm_rel_res_role resrole ON res.resource_id = resrole.resource_id
+            INNER JOIN sm_rel_op_role oprole ON resrole.role_id = oprole.role_id
+        </if>
+        WHERE res.resource_type='RESOURCE_BTN'
+        AND res.expire_date IS NULL
+        <if test="opId != null and opId != '' and opId > 1">
+            AND resrole.expire_date IS NULL
+            AND oprole.expire_date IS NULL
+            AND oprole.op_id = #{opId}
+        </if>
+        AND res.parent_id=#{resId}
+        ORDER BY parent_id, menu_sort ASC
+    </select>
+</mapper>

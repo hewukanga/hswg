@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumai.base.biz.mapper.PostPersonInfoMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        `id`,
+        `post_id`,
+        `user_id`,
+        `sign_up_status`,
+        `sign_up_reject_reason`,
+        `give_score_status`,
+        `work_audit_status`,
+        `work_audit_reject_reason`,
+        `work_evaluate`,
+        `sign_in_time`,
+        `sign_in_address`,
+        `work_before_images`,
+        `work_after_images`,
+        `sign_out_time`,
+        `sign_out_address`,
+        `consumption_time`,
+        `work_complete_remark`,
+        `abnormal_end_reason`,
+        `post_address_id`,
+        `create_id`,
+        `create_name`,
+        `create_date`,
+        `modify_id`,
+        `modify_name`,
+        `modify_date`,
+        `del_flag`,
+        `version`,
+        `remind`,
+        `user_age`
+    </sql>
+
+    <select id="findPostPersonInfoPage" resultType="com.jiumai.base.biz.vo.PostPersonInfoVO">
+        SELECT <include refid="Base_Column_List"></include>
+        FROM pm_post_person_info
+        WHERE del_flag = 1
+    </select>
+</mapper>
