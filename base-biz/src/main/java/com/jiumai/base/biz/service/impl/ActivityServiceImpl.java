@@ -4,6 +4,7 @@ import com.jiumai.base.common.core.exception.BizException;
 import com.jiumai.base.common.core.utils.CommonFuntions;
 import com.jiumai.base.biz.dto.ActivityDTO;
 import com.jiumai.base.biz.entity.Activity;
+import com.jiumai.base.biz.enums.ActivityStatusEnum;
 import com.jiumai.base.biz.mapper.ActivityMapper;
 import com.jiumai.base.biz.query.ActivityQuery;
 import com.jiumai.base.biz.service.ActivityService;
@@ -27,8 +28,6 @@ import java.util.List;
  */
 @Service
 public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> implements ActivityService {
-
-    private static final Integer ACTIVITY_STATUS_OFFLINE = 5;
 
     @Resource
     private ActivityMapper activityMapper;
@@ -68,7 +67,7 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
     @Override
     public Boolean offlineActivityByIds(List<Long> ids) {
         Activity activity = new Activity();
-        activity.setActivityStatus(ACTIVITY_STATUS_OFFLINE);
+        activity.setActivityStatus(ActivityStatusEnum.OFFLINE.getCode());
         LambdaUpdateWrapper<Activity> wrapper = new LambdaUpdateWrapper<>();
         wrapper.in(Activity::getId, ids);
         return this.update(activity, wrapper);
