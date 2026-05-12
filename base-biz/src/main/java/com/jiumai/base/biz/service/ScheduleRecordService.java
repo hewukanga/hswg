@@ -7,6 +7,8 @@ import com.jiumai.base.biz.vo.ScheduleRecordVO;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  * 排班记录表 服务类
@@ -37,4 +39,12 @@ public interface ScheduleRecordService extends IService<ScheduleRecord> {
      * @return
      */
     ScheduleRecordVO getScheduleRecordById(Long id);
+
+    /**
+     * 根据用户ID及月份查询排班信息列表
+     * @param opId
+     * @param month yyyy-MM
+     * @return
+     */
+    List<ScheduleRecordVO> findScheduleRecordListByOpIdAndMonth(Long opId, String month);
 }

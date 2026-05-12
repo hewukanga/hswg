@@ -65,6 +65,20 @@ public class ScheduleRecordController {
         return result.set(ResultCodeEnum.SUCCESS, "查询成功", scheduleRecordVO);
     }
 
+    @GetMapping("findScheduleRecordListByOpIdAndMonth")
+    @ApiOperation("根据用户ID及月份查询排班信息列表")
+    public ResultDTO<List<ScheduleRecordVO>> findScheduleRecordListByOpIdAndMonth(Long opId, String month) {
+        ResultDTO<List<ScheduleRecordVO>> result = new ResultDTO<>();
+        if (CommonFuntions.isEmptyObject(opId)) {
+            return result.set(ResultCodeEnum.ERROR_MISSING_PARAMS, "查询失败,opId为空");
+        }
+        if (CommonFuntions.isEmptyObject(month)) {
+            return result.set(ResultCodeEnum.ERROR_MISSING_PARAMS, "查询失败,month为空");
+        }
+        List<ScheduleRecordVO> list = scheduleRecordService.findScheduleRecordListByOpIdAndMonth(opId, month);
+        return result.set(ResultCodeEnum.SUCCESS, "查询成功", list);
+    }
+
     @PostMapping("batchRemoveScheduleRecordByIds")
     @ApiOperation("根据ID批量删除排班记录表")
     @OpLog(title = "根据ID批量删除排班记录表", businessType = BusinessTypeEnum.DELETE, isSaveRequestData = true)

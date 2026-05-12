@@ -14,7 +14,11 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.time.LocalDate;
+import java.time.YearMonth;
+import java.time.format.DateTimeParseException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -60,5 +64,30 @@ public class ScheduleRecordServiceImpl extends ServiceImpl<ScheduleRecordMapper,
         ScheduleRecordVO scheduleRecordVO = new ScheduleRecordVO();
         BeanUtils.copyProperties(scheduleRecord, scheduleRecordVO);
         return scheduleRecordVO;
+    }
+
+    @Override
+    public List<ScheduleRecordVO> findScheduleRecordListByOpIdAndMonth(Long opId, String month) {
+        YearMonth yearMonth;
+        try {
+            yearMonth = YearMonth.parse(month);
+        } catch (DateTimeParseException e) {
+            throw new BizException("查询失败，月份格式错误，格式为yyyy-MM");
+        }
+
+        LocalDate startDate = yearMonth.atDay(1);
+        LocalDate endDate = yearMonth.plusMonths(1).atDay(1);
+        List<ScheduleRecord> scheduleRecordList = this.lambdaQuery()
+                .eq(ScheduleRecord::getOpId, opId)
+                .ge(ScheduleRecord::getScheduleDate, startDate)
+                .lt(ScheduleRecord::getScheduleDate, endDate)
+                .orderByAsc(ScheduleRecord::getScheduleDate)
+                .list();
+
+        return scheduleRecordList.stream().map(scheduleRecord -> {
+            ScheduleRecordVO scheduleRecordVO = new ScheduleRecordVO();
+            BeanUtils.copyProperties(scheduleRecord, scheduleRecordVO);
+            return scheduleRecordVO;
+        }).collect(Collectors.toList());
     }
 }
