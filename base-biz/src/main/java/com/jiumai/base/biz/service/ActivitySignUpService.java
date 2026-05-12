@@ -32,6 +32,13 @@ public interface ActivitySignUpService extends IService<ActivitySignUp> {
     Long saveOrUpdateActivitySignUp(ActivitySignUpDTO activitySignUpDTO);
 
     /**
+     * Resident activity sign-up.
+     * @param activitySignUpDTO sign-up information
+     * @return sign-up id
+     */
+    Long signUpActivity(ActivitySignUpDTO activitySignUpDTO);
+
+    /**
      * 通过id查询成功活动报名表详情
      * @param id
      * @return

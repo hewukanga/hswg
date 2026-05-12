@@ -54,6 +54,17 @@ public class ActivitySignUpController {
         return result.set(ResultCodeEnum.FAIL, "保存失败");
     }
 
+    @PostMapping("signUpActivity")
+    @ApiOperation("居民端活动报名")
+    public ResultDTO<Long> signUpActivity(HttpServletRequest request, @RequestBody ActivitySignUpDTO activitySignUpDTO) {
+        ResultDTO<Long> result = new ResultDTO<>();
+        Long id = activitySignUpService.signUpActivity(activitySignUpDTO);
+        if (CommonFuntions.isNotEmptyObject(id)) {
+            return result.set(ResultCodeEnum.SUCCESS, "报名成功", id);
+        }
+        return result.set(ResultCodeEnum.FAIL, "报名失败");
+    }
+
     @GetMapping("getActivitySignUpById")
     @ApiOperation("根据ID获取活动报名表")
     public ResultDTO<ActivitySignUpVO> getActivitySignUpById(Long id) {
