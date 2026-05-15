@@ -5,6 +5,7 @@ import com.jiumai.base.common.core.dto.ResultDTO;
 import com.jiumai.base.common.core.enums.BusinessTypeEnum;
 import com.jiumai.base.common.core.enums.ResultCodeEnum;
 import com.jiumai.base.common.core.utils.CommonFuntions;
+import com.jiumai.base.biz.dto.WorkDispatchDTO;
 import com.jiumai.base.biz.dto.WorkResultDTO;
 import com.jiumai.base.biz.query.WorkResultQuery;
 import com.jiumai.base.biz.service.WorkResultService;
@@ -75,5 +76,20 @@ public class WorkResultController {
         }
         workResultService.removeByIds(ids);
         return result.set(ResultCodeEnum.SUCCESS, "删除成功");
+    }
+
+    @PostMapping("dispatchWork")
+    @ApiOperation("工作调度，更改工作所属执行人")
+    @OpLog(title = "工作调度", businessType = BusinessTypeEnum.UPDATE, isSaveRequestData = true)
+    public ResultDTO<String> dispatchWork(HttpServletRequest request, @RequestBody WorkDispatchDTO dispatchDTO) {
+        ResultDTO<String> result = new ResultDTO<>();
+        if (CommonFuntions.isEmptyObject(dispatchDTO) || CommonFuntions.isEmptyObject(dispatchDTO.getId())) {
+            return result.set(ResultCodeEnum.ERROR_MISSING_PARAMS, "调度失败,id为空");
+        }
+        Boolean success = workResultService.dispatchWork(dispatchDTO);
+        if (success) {
+            return result.set(ResultCodeEnum.SUCCESS, "调度成功");
+        }
+        return result.set(ResultCodeEnum.FAIL, "调度失败");
     }
 }

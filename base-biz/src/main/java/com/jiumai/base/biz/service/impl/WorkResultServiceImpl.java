@@ -2,12 +2,14 @@
 
 import com.jiumai.base.common.core.exception.BizException;
 import com.jiumai.base.common.core.utils.CommonFuntions;
+import com.jiumai.base.biz.dto.WorkDispatchDTO;
 import com.jiumai.base.biz.dto.WorkResultDTO;
 import com.jiumai.base.biz.entity.WorkResult;
 import com.jiumai.base.biz.mapper.WorkResultMapper;
 import com.jiumai.base.biz.query.WorkResultQuery;
 import com.jiumai.base.biz.service.WorkResultService;
 import com.jiumai.base.biz.vo.WorkResultVO;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.BeanUtils;
@@ -60,5 +62,15 @@ public class WorkResultServiceImpl extends ServiceImpl<WorkResultMapper, WorkRes
         WorkResultVO workResultVO = new WorkResultVO();
         BeanUtils.copyProperties(workResult, workResultVO);
         return workResultVO;
+    }
+
+    @Override
+    public Boolean dispatchWork(WorkDispatchDTO dispatchDTO) {
+        LambdaUpdateWrapper<WorkResult> wrapper = new LambdaUpdateWrapper<>();
+        wrapper.eq(WorkResult::getId, dispatchDTO.getId())
+                .set(WorkResult::getExecutorId, dispatchDTO.getExecutorId())
+                .set(WorkResult::getExecutorName, dispatchDTO.getExecutorName());
+
+        return this.update(wrapper);
     }
 }

@@ -1,5 +1,6 @@
 ﻿package com.jiumai.base.biz.service;
 
+import com.jiumai.base.biz.dto.WorkDispatchDTO;
 import com.jiumai.base.biz.dto.WorkResultDTO;
 import com.jiumai.base.biz.entity.WorkResult;
 import com.jiumai.base.biz.query.WorkResultQuery;
@@ -37,4 +38,11 @@ public interface WorkResultService extends IService<WorkResult> {
      * @return
      */
     WorkResultVO getWorkResultById(Long id);
+
+    /**
+     * 工作调度，仅更改工作的所属执行人
+     * @param dispatchDTO 调度入参（id + executorId + executorName）
+     * @return 更新成功返回true
+     */
+    Boolean dispatchWork(WorkDispatchDTO dispatchDTO);
 }
